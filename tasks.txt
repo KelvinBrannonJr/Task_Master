@@ -1,5 +1,2 @@
-Swim
-Wash
-Catch
-Play
-Shower
+Walk
+Workout
