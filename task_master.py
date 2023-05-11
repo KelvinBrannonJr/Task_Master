@@ -1,18 +1,18 @@
 isLooping = True
 
 while isLooping:
-    user_choice = input("For a task, would you like to 'Add', 'Show', 'Edit', 'Complete', or 'Exit' ?:\n").title()
+    user_choice = input("For a task, would you like to 'Add', 'Show', 'Edit', 'Complete', or 'Exit'?: ").title()
     format_choice = user_choice.strip()
 
     if 'Add' in user_choice:
         task = input("Enter a Task: ").title()
-        format_task = task.strip() + "\n"
+        format_task = task.strip()
 
         # With context manager - same as file.open() but, it automatically closes file after context scope
         with open("tasks.txt", 'r') as file:
             tasks = file.readlines()
 
-        tasks.append(format_task)
+        tasks.append(format_task + "\n")
 
         with open("tasks.txt", 'w') as file:
             file.writelines(tasks)
@@ -35,33 +35,42 @@ while isLooping:
             print(row)
 
     elif 'Edit' in user_choice:
-        edit_number = int(input("Starting with 1, which item number in the collection do you want to edit? "))
-        edit_number = edit_number - 1
+        try:
+            edit_number = int(input("Starting with 1, which item number in the collection do you want to edit? "))
+            edit_number = edit_number - 1
 
-        with open("tasks.txt", 'r') as file:
-            tasks = file.readlines()
+            with open("tasks.txt", 'r') as file:
+                tasks = file.readlines()
 
-        new_task = input("What would you like to change this to? ")
-        tasks[edit_number] = new_task.title() + '\n'
+            new_task = input("What would you like to change this to? ")
+            tasks[edit_number] = new_task.title() + '\n'
 
-        with open("tasks.txt", 'w') as file:
-            file.writelines(tasks)
+            with open("tasks.txt", 'w') as file:
+                file.writelines(tasks)
+
+        except ValueError:
+            print("Invalid selection of item..Use only the number next to task item")
+            continue    # continue - will rerun the while loop back at the top, nothing below will execute
 
     elif 'Complete' in user_choice:
-        complete = int(input("Enter a number of task you have completed: \n"))
+        try:
+            complete = int(input("Enter a number of task you have completed: \n"))
 
-        with open("tasks.txt", 'r') as file:
-            tasks = file.readlines()
+            with open("tasks.txt", 'r') as file:
+                tasks = file.readlines()
 
-        selected_index = complete - 1
-        completed_task = tasks[selected_index].strip('\n')
-        tasks.pop(selected_index)
+            selected_index = complete - 1
+            completed_task = tasks[selected_index].strip('\n')
+            tasks.pop(selected_index)
 
-        with open("tasks.txt", 'w') as file:
-            file.writelines(tasks)
+            with open("tasks.txt", 'w') as file:
+                file.writelines(tasks)
 
-        message = f"Task: {completed_task}, was completed and removed"
-        print(message)
+            message = f"Task: {completed_task}, was completed and removed"
+            print(message)
+        except IndexError:
+            print("That item number does not exist..")
+            continue
 
     elif 'Exit' in user_choice:
         isLooping = False
