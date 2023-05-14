@@ -1,12 +1,7 @@
+# from functions import get_tasks, write_tasks # *** Same as below but have to write functions out one by one.
+import functions
+
 isLooping = True
-
-
-def get_tasks():
-    # With context manager - same as file.open() but, it automatically closes file after context scope
-    with open("tasks.txt", 'r') as local_file:
-        local_tasks = file.readlines()
-    return local_tasks
-
 
 while isLooping:
     user_choice = input("For a task, would you like to 'Add', 'Show', 'Edit', 'Complete', or 'Exit'?: ").title()
@@ -16,15 +11,14 @@ while isLooping:
         task = input("Enter a Task: ").title()
         format_task = task.strip()
 
-        tasks = get_tasks()
+        tasks = functions.get_tasks()
 
         tasks.append(format_task + "\n")
 
-        with open("tasks.txt", 'w') as file:
-            file.writelines(tasks)
+        functions.write_tasks(tasks)
 
     elif 'Show' in user_choice:
-        tasks = get_tasks()
+        tasks = functions.get_tasks()
 
         # List Comprehension - inline for-loop returns a list without declaring empty list for new items.
         new_tasks = [item.strip('\n') for item in tasks]
@@ -34,7 +28,7 @@ while isLooping:
         # for item in tasks:
         #     item = item.strip('\n')
         #     new_tasks.append(item)
-        #
+
         for index, item in enumerate(new_tasks):
             row = f"{index + 1} - {item}"
             print(row)
@@ -44,13 +38,12 @@ while isLooping:
             edit_number = int(input("Starting with 1, which item number in the collection do you want to edit? "))
             edit_number = edit_number - 1
 
-            tasks = get_tasks()
+            tasks = functions.get_tasks()
 
             new_task = input("What would you like to change this to? ")
             tasks[edit_number] = new_task.title() + '\n'
 
-            with open("tasks.txt", 'w') as file:
-                file.writelines(tasks)
+            functions.write_tasks(tasks)
 
         except ValueError:
             print("Invalid selection of item..Use only the number next to task item")
@@ -60,14 +53,13 @@ while isLooping:
         try:
             complete = int(input("Enter a number of task you have completed: \n"))
 
-            tasks = get_tasks()
+            tasks = functions.get_tasks()
 
             selected_index = complete - 1
             completed_task = tasks[selected_index].strip('\n')
             tasks.pop(selected_index)
 
-            with open("tasks.txt", 'w') as file:
-                file.writelines(tasks)
+            functions.write_tasks(tasks)
 
             message = f"Task: {completed_task}, was completed and removed"
             print(message)
@@ -83,3 +75,5 @@ while isLooping:
         print("Sorry that is not a valid choice...")
 
 print("Exiting program, goodbye..")
+
+
