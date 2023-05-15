@@ -27,12 +27,6 @@ while isLooping:
         # List Comprehension - inline for-loop returns a list without declaring empty list for new items.
         new_tasks = [item.strip('\n') for item in tasks]
 
-        # Same way but with a for-loop ** Longer route but same as list comprehension
-        # new_tasks = []
-        # for item in tasks:
-        #     item = item.strip('\n')
-        #     new_tasks.append(item)
-
         for index, item in enumerate(new_tasks):
             row = f"{index + 1} - {item}"
             print(row)
