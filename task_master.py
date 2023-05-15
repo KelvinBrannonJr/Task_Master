@@ -1,7 +1,11 @@
 # from functions import get_tasks, write_tasks # *** Same as below but have to write functions out one by one.
 import functions
+import time
 
 isLooping = True
+
+current_time = time.strftime("%b %d %Y %H:%M:%S")
+print("Currently it is", current_time)
 
 while isLooping:
     user_choice = input("For a task, would you like to 'Add', 'Show', 'Edit', 'Complete', or 'Exit'?: ").title()
