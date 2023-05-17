@@ -4,5 +4,4 @@ Swim
 People cant fly lol
 code
 sleep
-talk
 Shower
