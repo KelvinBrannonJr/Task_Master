@@ -1,6 +1,12 @@
 import functions
 import PySimpleGUI as gui
 import time
+import os
+
+# Create the task.txt file if not in directory
+if not os.path.exists("tasks.txt"):
+    with open("tasks.txt", 'w') as file:
+        pass
 
 # Design Theme
 gui.theme("DarkBlue14")
