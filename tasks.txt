@@ -1,9 +1,5 @@
-Run
-Swim
-Read a book
+relax
 code
-sleep
-Shower
-walk dog
-eat
-Brew some tea
+use streamlit
+eat lunch
+
