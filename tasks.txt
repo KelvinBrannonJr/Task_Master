@@ -1,5 +1,6 @@
 relax
 code
 use streamlit
-eat lunch
-
+Sweep floor
+Brew tea
+jog a mile

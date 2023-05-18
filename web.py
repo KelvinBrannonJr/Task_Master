@@ -10,6 +10,7 @@ def add_task():
     new_task = st.session_state['-NEW-TASK-'] + "\n"
     tasks.append(new_task)
     functions.write_tasks(tasks)
+    st.session_state['-NEW-TASK-'] = ""
 
 
 # Layout of items in app,
@@ -20,9 +21,15 @@ st.write("Please select from the menu")
 
 
 # Iterate through the list and create a checkbox for each item
-for task in tasks:
-    st.checkbox(task)
+for index, task in enumerate(tasks):
+    checkbox = st.checkbox(task, key=task)
 
+    # Get index of task item and delete task if checkbox is checked
+    if checkbox:
+        tasks.pop(index)
+        functions.write_tasks(tasks)
+        del st.session_state[task]
+        st.experimental_rerun()
 
 # Input box to add new task item
 st.text_input(
