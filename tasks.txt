@@ -1,6 +1,7 @@
 Run
 Swim
-Read a bookcode
+Read a book
+code
 sleep
 Shower
 walk dog
